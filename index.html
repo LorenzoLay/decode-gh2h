@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desglosador</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/index.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/spdh.js"></script>
+    <script src="js/cmd.js"></script>
+    <link rel="icon" href="img/loro.png" type="image/x-icon">
+</head>
+<body>
+    <header class="header">
+        <h1 class="header-title">Súper Desglosador H2H Getnet v1.0.1</h1>
+        <p class="header-description">Loro Soft Web 2025</p>
+     </header>
+ 
+    <section class="data">
+        <div class="box">
+            <div class="box-main">
+                <div class="box-header">
+                    <div class="box-header__title">
+                        Data    
+                    </div>
+                </div>
+                    
+            </div>
+            <div>
+                <textarea class="box-main__input_data"  id="data" name="textarea" ></textarea>
+            </div>
+            <div class="box-btn">
+                <button class="box-main__btn" id="cmdDesCommand">Comando</button>
+                <!--<button class="box-main__btn" id="cmdDesSpdh">SPDH</button>-->
+                <button class="box-main__btn" id="cmdClean">Limpiar</button>
+            </div>
+        </div>            
+    </section>
+
+    <section class="data">
+        <div class="box-resp">
+            <div class="box-main">
+                <div class="box-header">
+                    <div class="box-header__title">
+                        Desglose    
+                    </div>
+                </div>
+                    
+            </div>
+            <div id="divTabla">
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th class="table-thead__0">n</th>
+                            <th class="table-thead__1">Nombre</th>
+                            <th class="table-thead__2">Valor</th>
+                            <th class="table-thead__3">Descripción</th>
+                         
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+            
+                    </tbody>
+                </table>
+             
+            </div>
+            
+        </div>            
+    </section>
+
+
+
+    
+    
+</body>
+</html>
