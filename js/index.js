@@ -2,7 +2,7 @@ console.log("index js vinculado");
 
 window.onload = function(){
     document.getElementById("cmdDesCommand").addEventListener("click", ()=>desglosarComando());
-    document.getElementById("cmdDesSpdh").addEventListener("click", ()=>desglosarSpdh());
+    //document.getElementById("cmdDesSpdh").addEventListener("click", ()=>desglosarSpdh());
     document.getElementById("cmdClean").addEventListener("click", ()=>reload());
     
 }
