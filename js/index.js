@@ -2,7 +2,7 @@ console.log("index js vinculado");
 
 window.onload = function(){
     document.getElementById("cmdDesCommand").addEventListener("click", ()=>desglosarComando());
-    //document.getElementById("cmdDesSpdh").addEventListener("click", ()=>desglosarSpdh());
+    document.getElementById("cmdDesSpdh").addEventListener("click", ()=>desglosarSpdh());
     document.getElementById("cmdClean").addEventListener("click", ()=>reload());
     
 }
@@ -30,11 +30,13 @@ function desglosarComando(){
         return true;
     }
     if (dataInputSp[0] == "0600"){
-        desgReqSaleOnus(dataInputSp);
+        //desgReqSaleOnus(dataInputSp);//con workingkey
+        desgReqSaleOnus2_8(dataInputSp)
         return true;
     }
     if (dataInputSp[0] == "0610"){
-        desgRespSaleOnus(dataInputSp);
+        //desgRespSaleOnus(dataInputSp);
+        desgRespSaleOnus2_8(dataInputSp);
         return true;
     }
 

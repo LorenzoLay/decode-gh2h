@@ -196,10 +196,11 @@ function desgRespReadCard(dataInputSp){
 
 }
 /* ************************************************************************************************** */
-/* Solicitud Sale or void*/ 
+/* Solicitud Sale Onus*/ 
 /* ************************************************************************************************** */ 
 function desgReqSaleOnus(dataInputSp){
-    let nombre = ["Comando",
+    let nombre = [
+        "Comando",
         "Estado",
         "Monto",
         "Tipo de tarjeta",
@@ -212,14 +213,12 @@ function desgReqSaleOnus(dataInputSp){
         "Solicitud de PIN",
         "Código de moneda",
         "Campos Necesarios<br/>Para comando 610",
-
-
-        "Adquirente"
-        
+        "Adquirente" 
 
     ];
 
-    let descripcion = ["comando Venta Onus, CAJA -> PINPAD",
+    let descripcion = [
+        "comando Venta Onus, CAJA -> PINPAD",
         "“00” Con lectura de tarjeta.<br/>“01” Sin lectura de tarjeta (excepto cambio de monto para CTLS).<br/>NOTA: En el caso que el cliente tenga alguna promoción y el monto original cambió, este valor va en “00” pata ctls, ya que debe volver a leer la tarjeta pasándole el nuevo monto. Para banda y EMV Chip ese valor va en 01.",
         "Incluir dos decimales. Ej: $1.000.- se debe enviar “100000”",
         "“CR” Crédito<br/>“DB” Debito",
@@ -239,11 +238,55 @@ function desgReqSaleOnus(dataInputSp){
 
 }
 /* ************************************************************************************************** */
-/* Response  Sale or void*/ 
+/* Command venta Onus versión 2.8*/
+/* ************************************************************************************************** */ 
+function desgReqSaleOnus2_8(dataInputSp){
+    //let tableBody = document.getElementById("tbody");
+    let nombre = [
+        "Comando",
+        "Estado",
+        "Monto",
+        "Tipo de tarjeta",
+        "Lista de montos vuelto",
+        "Monto vuelto",
+        "Flag mostrar glosas",
+        "Glosas",
+        "Solicitud de PIN",
+        "Código de moneda",
+        "Campos Necesarios Para comando 610",
+        "Adquirente"        
+        
+       
+    ];
+
+    let descripcion = [
+        "comando inicio de venta Onus, CAJA -> PINPAD",
+        "<00> Con lectura de tarjeta. <01> Sin lectura de tarjeta (excepto cambio de monto para CTLS).NOTA: En el caso que el cliente tenga alguna promoción y el monto original cambió, este valor va en 00 para ctls, ya que debe volver a leer la tarjeta pasándole el nuevo monto. Para Banda y EMV Chip ese valor va en 01.",
+        "Incluir dos decimales. Ej: $1.000.- se debe enviar “100000”",
+        "“CR” Crédito “DB” Debito “NN” Tarjetas internacionales.“” o vacío para transacciones iniciales donde se desconoce el tipo de tarjeta.",
+        "Separador “;” incluyendo el ultimo. Lista de montos de vuelto con decimales.Ej: “200000;500000;1000000;2000000;”",
+        "Si ya fue seleccionado desde la caja con valor mayor o igual a cero, no debe mostrar opción de seleccionar vuelto en el Pinpad.Solo para debito:0 = sin vuelto.>0 = con vuelto ingresado en caja.Vacío = solicitar vuelto en el Pinpad.",
+        "“Y” Encendido se utiliza si desea confirmar monto/cuotas.“N” Apagado para solo lectura de tarjeta o solo ingresar pin.",
+        "Enviar líneas con un separador, de esta manera tendremos solo un campo con múltiples líneas no limitadas a lo que permite un equipo en particular.|línea 1  ;  línea 2  ;  línea n;|",
+        "“00” Siempre.“01” Permite CVM.“02” Nunca.",
+        "“CL” Tipo moneda pesos chilenos. Utilizar por defecto.“US” Para montos tipo dólar.",
+        "Campo PAN:<br/>0 = vacio<br/>1 = sha-1<br/>2 = sha-256<br/>Track2:<br/>0 = En Claro<br/>1 = Cifrado<br/>Ej: “10”, esto quiere decir que el PAN va en sha-1 y el track2 en claro",
+        "Posibles valores para buscar llaves de cifrado:<br/>01: Wallmart<br/>02: Falabella<br/>03: Ripley<br/>04: Cencosud<br/>05: Generico Getnet"     
+        
+        
+        
+    ];
+    addRegSolicitud(nombre,descripcion,dataInputSp);
+
+}
+
+/* ************************************************************************************************** */
+/* Response  command 0610*/ 
 /* ************************************************************************************************** */ 
 function desgRespSaleOnus(dataInputSp){
    
-    let nombre = ["Comando",
+    let nombre = [
+        "Comando",
         "Código de respuesta",
         "4 últimos dígitos",        
         "Nombre Tarjeta Habiente",
@@ -262,7 +305,8 @@ function desgRespSaleOnus(dataInputSp){
     ];
 
 
-    let descripcion = ["Respuesta vta Onus, CAJA <- PINPAD",
+    let descripcion = [
+        "Respuesta vta Onus, CAJA <- PINPAD",
         "“00” comando procesado correctamente en el Pinpad.<br/>“99” comando terminó con error/cancelado/timeout.",
         "Siempre se entregarán los 4 últimos dígitos de la tarjeta.",
         "Obtenido del track1 o para EMV del Tag 50",
@@ -272,6 +316,54 @@ function desgRespSaleOnus(dataInputSp){
         "0 = vacio<br/>1 = sha-1<br/>2 = sha-256",
         "0 = En Claro<br/>1 = Cifrado(Working key track)<br/>NOTA: Al dejar el Track2 en claro, no se estaría cumpliendo normativa PCI.",
         "Cifrado con la working key de pin",
+        "Monto seleccionado en el Pinpad o se devuelve el mismo valor enviado desde la caja.",
+        "Datos EMV en formato TLV",
+        "Verifone XXX-XXX-XXX<br/>PAX o Ingénico XXXXXXXXXXXX",
+        "P200<br/>DX6000<br/>A80<br/>A33<br/>",
+        "Versión de la aplicación"
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+
+}
+function desgRespSaleOnus2_8(dataInputSp){
+   
+    let nombre = [
+        "Comando",
+        "Código de respuesta",
+        "4 últimos dígitos",        
+        "Nombre Tarjeta Habiente",
+        "Tipo captura",
+        "Marca de la tarjeta",
+        "PAN",
+        "tack2",
+        "Bin",
+        "PAN (cifrado)",
+        "PINBLOCK (cifrado)",
+        "KSN PIN",
+        "KSN PAN",
+        "Monto vuelto",
+        "Criptograma",
+        "Serie del terminal",
+        "Modelo terminal",
+        "Versión de la app"
+
+    ];
+
+
+    let descripcion = [
+        "Respuesta vta Onus, CAJA <- PINPAD",
+        "“00” comando procesado correctamente en el Pinpad.<br/>“99” comando terminó con error/cancelado/timeout.",
+        "Siempre se entregarán los 4 últimos dígitos de la tarjeta.",
+        "Obtenido del track1 o para EMV del Tag 50",
+        "Los Posibles valores son:<br/>B=banda<br/>E=EMV contacto<br/>C=Contactless<br/>F=Fallback",
+        "“VISA”, “MASTERCARD”, “AMEX”, “DISCOVER”.",
+        "0 = vacio<br/>1 = sha-1<br/>2 = sha-256",
+        "0 = En Claro<br/>1 = Cifrado(Working key track)<br/>NOTA: Al dejar el Track2 en claro, no se estaría cumpliendo normativa PCI.",
+        "Bin de la tarjeta",
+        "AES256 Dukpt (64)",
+        "AES256 Dukpt (16)",
+        "En claro 4 + KSN",
+        "En claro",
         "Monto seleccionado en el Pinpad o se devuelve el mismo valor enviado desde la caja.",
         "Datos EMV en formato TLV",
         "Verifone XXX-XXX-XXX<br/>PAX o Ingénico XXXXXXXXXXXX",
@@ -733,3 +825,4 @@ function desgRespValAut0900(dataInputSp){
     ];
     addRegRespuesta(nombre,descripcion,dataInputSp);
 }
+/* **************************************/
