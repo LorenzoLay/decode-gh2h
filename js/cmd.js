@@ -408,6 +408,80 @@ function desgRespReverse(dataInputSp){
     ];
     addRegRespuesta(nombre,descripcion,dataInputSp);
 }
+
+function desReqContingencia(dataInputSp){
+    let nombre = [
+        "Comando",
+        "mensaje ISO (Venta o Anulación)"
+        
+    ];
+    let descripcion = [
+        "Comando requerimiento de inicio de venta o anulación en modo contingencia, CAJA -> PINPAD",
+        "Mensaje armado por la DLL para procesar la transacción"  
+        
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}
+function desRespContingencia(dataInputSp){
+    let nombre = [
+        "Comando",
+        "Codigo Respuesta",
+        "Mensaje Respuesta ISO (Venta o Anulación)"
+        
+    ];
+    let descripcion = [
+        "Comando respuesta de inicio o anulación de contingencia, CAJA <- PINPAD",
+        "Mensaje armado por la DLL para procesar la transacción"  
+        
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}
+/* ************************************************************************************************** */
+/* Command Req echo*/
+/* ************************************************************************************************** */ 
+function desgReqEcho(dataInputSp){
+    let nombre = [
+        "Comando"
+      
+    ];
+    let descripcion = [
+        "Comando requerimiento de echo CAJA -> PINPAD",
+                
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}
+/* ************************************************************************************************** */
+/* Command resp echo*/
+/* ************************************************************************************************** */ 
+function desgRespEcho(dataInputSp){
+    let nombre = [
+        "Comando",
+        "Numero de Serie",
+        "Versión de Software",
+        "Firmware",
+        "TID",
+        "Modelo",
+        "Rut Empresa",
+        "Nombre Sucursal",
+        "Codigo de Sucursal"
+
+      
+    ];
+    let descripcion = [
+        "Comando respuesta de echo CAJA <- PINPAD",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+
+                
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}
 /* ************************************************************************************************** */
 /* Command Req validate upgrade*/
 /* ************************************************************************************************** */ 
@@ -826,3 +900,42 @@ function desgRespValAut0900(dataInputSp){
     addRegRespuesta(nombre,descripcion,dataInputSp);
 }
 /* **************************************/
+function desgReqfinalVta(dataInputSp){
+    let nombre = [
+        "Comando",
+        "Código respuesta de la transacción",
+        "Glosas (Aprobado/Rechazado.Declinado)",
+        "Criptograma para transacciones EMV",
+        "Validar Criptograma"
+
+    ];
+    let descripcion = [
+        "Comando requerimiento de finalización de venta, CAJA <- PINPAD<br/>0350 finalización de venta<br/>0450 finalización venta contingencia<br/>0650 finalización venta Onus",
+        "Código obtenido en la respuesta del autorizador ",
+        "Enviar líneas con un separador, de esta manera tendremos solo un campocon múltiples líneas no limitadas a lo que permite un equipo en particular.|línea 1  ;  línea 2  ;  línea n;|",
+        "Se debe validar la respuesta para certificaciones. Tag 8A, 91, 71 - 72.Este campo solo aplica para transacciones EMV CHIP y debe ser entregado a la tarjeta para su validación.",
+        "“SI”<br/>“NO”"
+        
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}
+
+function desgRespfinalVta(dataInputSp){
+    let nombre = [
+        "Comando",
+        "Código respuesta de la transacción",
+        "Glosas (Aprobado/Rechazado.Declinado)",
+        "Criptograma para transacciones EMV",
+        "Validar Criptograma"
+
+    ];
+    let descripcion = [
+        "Comando requerimiento de finalización de venta, CAJA <- PINPAD<br/>0350 finalización de venta<br/>0450 finalización venta contingencia<br/>0650 finalización venta Onus",
+        "Código obtenido en la respuesta del autorizador ",
+        "Enviar líneas con un separador, de esta manera tendremos solo un campocon múltiples líneas no limitadas a lo que permite un equipo en particular.|línea 1  ;  línea 2  ;  línea n;|",
+        "Se debe validar la respuesta para certificaciones. Tag 8A, 91, 71 - 72.Este campo solo aplica para transacciones EMV CHIP y debe ser entregado a la tarjeta para su validación.",
+        "“SI”<br/>“NO”"
+        
+    ];
+    addRegRespuesta(nombre,descripcion,dataInputSp);
+}

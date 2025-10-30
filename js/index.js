@@ -2,7 +2,7 @@ console.log("index js vinculado");
 
 window.onload = function(){
     document.getElementById("cmdDesCommand").addEventListener("click", ()=>desglosarComando());
-    document.getElementById("cmdDesSpdh").addEventListener("click", ()=>desglosarSpdh());
+    //document.getElementById("cmdDesSpdh").addEventListener("click", ()=>desglosarSpdh());
     document.getElementById("cmdClean").addEventListener("click", ()=>reload());
     
 }
@@ -41,7 +41,8 @@ function desglosarComando(){
     }
 
     if (dataInputSp[0] == "0400"){
-        desgReqReverse(dataInputSp);
+        //desgReqReverse(dataInputSp);
+        desReqContingencia(dataInputSp);
         return true;
     }
     if (dataInputSp[0] == "0410"){
@@ -93,6 +94,20 @@ function desglosarComando(){
     
     if (dataInputSp[0] == "0910"){
         desgRespValAut0900(dataInputSp);
+        return true;
+    }
+
+    if ( (dataInputSp[0] == "0350") || (dataInputSp[0] == "0450") || (dataInputSp[0] == "0650")){
+        desgReqfinalVta(dataInputSp);
+        return true;
+    }
+    if ( (dataInputSp[0] == "0360") || (dataInputSp[0] == "0460") || (dataInputSp[0] == "0660")){
+        desgRespfinalVta(dataInputSp);
+        return true;
+    }
+
+    if (dataInputSp[0] == "0100"){
+        desgReqEcho(dataInputSp);
         return true;
     }
 
