@@ -110,6 +110,12 @@ function desglosarComando(){
         desgReqEcho(dataInputSp);
         return true;
     }
+    if (dataInputSp[0] == "0110"){
+        desgRespEcho(dataInputSp);
+        return true;
+    }
+
+    
 
     if (dataInputSp[0] != ""){
         alert("No es posible procesar el mensaje ingresado!!!!\nMensaje:\n" + dataInputSp[0]);
