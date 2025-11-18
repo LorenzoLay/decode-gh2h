@@ -335,7 +335,7 @@ function desgRespSaleOnus2_8(dataInputSp){
         "Tipo captura",
         "Marca de la tarjeta",
         "PAN",
-        "tack2",
+        "Track2",
         "Bin",
         "PAN (cifrado)",
         "PINBLOCK (cifrado)",
